@@ -1,0 +1,93 @@
+   <script>
+        var ranka = [34,23,14,5,31,243,22,67,41,18]
+        //过程 对于第一个数，把他赋值给新的变量A，。然后让A和第二个变量相比较，如果相减小于0 ，（这个怎么实现，因为如果相减<0的话，肯定需要使用布尔值进行判断把。）那么将第二个数赋值给A
+        //在和第二个数进行比较。依次进行，这是第一轮
+        //需要双重循环。外层循环和内层循环控制不一样的
+        for(i=0;i<=ranka.length -1;i++){         //这个i的值表示需要几趟  '我这样写把代码写死了，应该用length'
+            for(j=0;j<=ranka.length -i-1;j++){     //表示每趟需要比较的次数，都应该是9次。感觉这样避免了很多不必要的算法，肯定有简单的，避免重复的
+//这之间的转换，怎么确定变量的关系。
+                
+
+            }
+        }
+   
+var arr = [3,4,2,14,23];
+ for(var i=0; i<=arr.length-1; i++){  //为什么i,j要从0开始，并且长度是这样写，因为写
+     for(var j=0; j<=arr.length-i-1; j++){   //具体的值就把代码写死了。
+         if(arr[j] > arr[j+1]){             //为什么j的长度是这个，要考虑清除
+         var temp = arr[j];
+         arr[j] = arr[j+1];
+         arr[j+1] = temp;
+        }
+     }
+ }     
+ //改进之后的2：       
+ var arr = [3,4,2,14,23];
+ for(var i=0; i<=arr.length-1; i++){ 
+     Boolean isSorted = true;    //利用不二变量isSorted作为标记
+     for(var j=0; j<=arr.length-i-1; j++){  
+         if(arr[j] > arr[j+1]){             
+         var temp = arr[j];
+         arr[j] = arr[j+1];
+         arr[j+1] = temp;
+         isSorted = false;
+        }
+     }
+     if(isSorted){
+         break;
+     }
+ }     
+ //改进之三：       
+ var arr = [3,4,2,14,23];
+ var temp = 0;  
+ var lastExchangeIndex = 0;  //记录最后一次交换的位置
+ var sortBorder = array.length -1;  //无序数列的边界，每次比较只需要比较到这里为止
+ for(var i=0; i<=arr.length-1; i++){ 
+     Boolean isSorted = true;    //有序标记，每一轮的初始是true
+     for(var j=0; j<sortBorder; j++){  //这里有比较的范围告诉程序了
+         if(arr[j] > arr[j+1]){             
+         var temp = arr[j];
+         arr[j] = arr[j+1];
+         arr[j+1] = temp;
+         isSorted = false; //有元素交换，所以不是有序，标记变为false
+        lastExchangeIndex = j;  ////把无序数列的边界更新为最后一次交换元素的位置
+        }
+     }
+     sortBorder = lastExchangeIndex;
+     if(isSorted){
+         break;
+     }
+ }   
+//选择排序
+function selectionSort(){    //定义一个函数
+    var len = arr.length;
+    var minIndex, temp;      //创建minIndex 和空变量
+    for(var i = 0; i< len -1 ;i++){
+        minIndex = i;  //先给一个索引号，假设i为最小的数
+        for (var j = i+1; j < len; j++){    //遍历循环，如果i之后有比索引i更小的数，则将索引变成j
+            if(arr[j] < arr[minIndex]){  //寻找最小的数
+                minIndex = j;      //将最小的数的索引保存
+            }
+        }
+        temp = arr[i];      //minIndex始终保存着最小值的位置的索引，随着i的自增，遍历的数组
+        arr[i]=arr[minIndex];   //长度越来越短，直到排序完成。
+        arr[minIndex] = temp;
+    }
+    return arr;
+}
+console.log(selectionSort([132,545,56,79,90,4,56,7,32]))
+
+//3.插入排序
+function insertSort(arr){   //自我思考：怎么把已经排序的元素逐步向后挪位
+    var len = arr.length;   //为新插入元素提供插入的位置
+    var j, temp;
+    for(var i=1; i<len;i++){ //从第一个元素开始，该元素可以被认为已经被排序
+        j=i-1; //默认已排序的元素
+        temp = arr[i];      //&&是逻辑运算符与
+        while(j >= 0 && arr[j] > temp) { //在已排序好的队列中从后向前扫描
+            arr[j +1] = arr[j]; //已排序的元素大于新元素，将该元素移动到下一个位置
+            j--;
+        }
+        arr[j+1] =temp;
+    }
+return arr;
